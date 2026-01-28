@@ -1,0 +1,17 @@
+configuration {
+    modi: "drun";
+    width: 25;
+    show-icons: true;
+    font: "Sauce Code Pro Nerd Font 15";
+
+    kb-move-front: "";
+    kb-move-end: "";
+    kb-move-char-back: "Left";
+    kb-move-char-forward: "Right";
+
+    kb-remove-to-eol: "";
+    kb-remove-to-sol: "";
+    kb-row-up: "Up,Ctrl+u";
+    kb-row-down: "Down,Ctrl+e";
+}
+@theme "/home/shawn/.config/rofi/themes/arthur.rasi"

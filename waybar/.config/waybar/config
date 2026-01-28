@@ -1,0 +1,113 @@
+{
+    // basic
+    "layer": "top",
+    "position": "top",
+     "height": 28,
+    // "width": 1280,
+    "spacing": 4,
+    "margin-top": 8,
+    "margin-bottom": 0,
+    "margin-left": 8,
+    "margin-right": 8,
+
+    // module
+    "modules-left": ["hyprland/workspaces","hyprland/window"],
+    "modules-center": ["tray"],
+    "modules-right": ["custom/lx-music-lyric","custom/lx-music","custom/weather","network", "pulseaudio","clock"],
+
+
+
+    "hyprland/window": {
+        "format": " ~ {initialTitle}",
+        "separate-outputs": false
+    },
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 8
+    },
+
+    "clock": {
+        "format":"<span color=\"#97dbd5\">󱑍</span> {:%H:%M %a}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "calendar": {"format": { "today":"<span color='#ff6699'><b><u>{}</u></b></span>"}},
+      //  "format-icons": ["󱑖","󱑋","󱑌","󱑍","󱑎","󱑏","󱑐","󱑑","󱑒","󱑓","󱑔","󱑕"],
+    },
+
+
+    "network": {
+        "format-wifi": "<span color=\"#97dbd5\">{icon}</span> {essid}",
+        "format-ethernet": "<span color=\"#97dbd5\"> </span> {ifname}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "",
+        "tooltip-format": "{bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        "interval": 1,
+    },
+
+    "pulseaudio": {
+        "format": "<span color=\"#97dbd5\">{icon}</span> {volume}%",
+        "format-bluetooth": "<span color=\"#97dbd5\">{icon} </span> {volume}%",
+        "format-muted": "<span color=\"#97dbd5\">󰪑 </span> muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "custom/lx-music": {
+        "exec":"$HOME/.config/waybar/scripts/lx-music.sh 2> /dev/null",
+        "on-click": "playerctl -p chromium,mpv,%any play-pause",
+        "on-click-right":"playerctl -p chromium,mpv,%any next",
+        "interval": 1,
+        "format":"<span color=\"#97dbd5\">♫</span> {}",
+        "max-length": 30,
+    },
+
+    "hyprland/workspaces": {
+        "all-outputs": "false",
+        "active-only": "true",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "I",
+            "2": "II",
+            "3": "III",
+            "4": "IV",
+            "5": "V",
+            "6": "VI",
+            "7": "VII",
+            "8": "VIII",
+            "9": "IX",
+            "10": "X",
+          "persistent": "persistent",
+          "empty": "empty"
+        },
+      },
+
+    "custom/weather": {
+        "exec": "$HOME/.config/waybar/scripts/weather.sh Xining",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false,
+        "interval": 900,
+    },
+
+    "custom/lx-music-lyric": {
+        "exec": "curl http://localhost:23330/status 2> /dev/null | jq -r .lyricLineText",
+        "format": "<span color=\"#97dbd5\">❄ </span> {} <span color=\"#97dbd5\"> ❄</span> ",
+        "interval": 1,
+        "max-length": 30,
+        "min-length": 30,
+    },
+
+}

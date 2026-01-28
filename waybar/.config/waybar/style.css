@@ -1,0 +1,41 @@
+* {
+  font-size: 14px;
+  font-family: "Material Design Icons", "NotoSans Nerd Font";
+  min-height: 0;
+  border-radius: 8px;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.57);
+}
+
+#workspaces button {
+  padding: 0 3px;
+  background-color: transparent; /* 背景色 */
+  color: #fff; /* 字体色 */
+  /* border-bottom: 0px solid transparent; */ /* 底部线 */
+}
+
+#workspaces button.active {
+  /* background: rgba(0, 0, 0, 0.2); */
+  color: #55ff33;
+  box-shadow: inherit;
+}
+
+#battery,
+#custom-test1,
+#pulseaudio,
+#network,
+#backlight,
+#tray,
+#custom-lx-music,
+#custom-weather,
+#custom-lx-music-lyric,
+#clock {
+  padding: 3px;
+  color: #fff;
+}
+
+#window {
+  color: #55ff33;
+}

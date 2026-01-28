@@ -1,0 +1,5 @@
+.lua-format
+lazy-lock.json
+*.vim
+*.log
+fish_variables

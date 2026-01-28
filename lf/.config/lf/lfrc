@@ -1,0 +1,131 @@
+# LF Config File
+
+
+set info size
+set relativenumber true
+set scrolloff 5
+#set drawbox
+set cursorpreviewfmt "\033[7m"
+
+set icons true
+
+set shellopts '-eu'
+set ifs "\n"
+
+# preview
+set previewer ~/.config/lf/preview.sh
+
+
+
+cmd delete ${{
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "delete?[y/N]"
+    read ans
+    [ $ans = "y" ] && trash-put $fx
+}}
+
+cmd open ${{
+# <<<
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+
+    text/*|application/json|inode/x-empty) $EDITOR $fx;;
+
+    image/gif) setsid -f mpv --audio-display=no $f >/dev/null 2>&1 ;;
+    image/*) setsid -f imv $f >/dev/null 2>&1 ;;
+    audio/*) setsid -f mpv $f >/dev/null 2>&1 ;;
+    video/*) setsid -f mpv $f >/dev/null 2>&1 ;;
+
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/msword) setsid -f wps $f ;;
+    application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.ms-powerpoint) setsid -f wpp $f;;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/vnd.ms-excel) setsid -f et $f;;
+
+    application/pdf) setsid -f evince $fx >/dev/null 2>&1 ;;
+    application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+
+        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+    esac
+# >>>
+}}
+
+
+cmd extract ${{
+# <<<
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "extract?[y/N]"
+    read ans
+    [ $ans = "y" ] && {
+        case $fx in
+            *.tar.bz2)   tar xjf $fx     ;;
+            *.tar.gz)    tar xzf $fx     ;;
+            *.bz2)       bunzip2 $fx     ;;
+            *.rar)       unrar e $fx     ;;
+            *.gz)        gunzip $fx      ;;
+            *.tar)       tar xf $fx      ;;
+            *.tbz2)      tar xjf $fx     ;;
+            *.tgz)       tar xzf $fx     ;;
+            *.zip)       unzip $fx       ;;
+            *.Z)         uncompress $fx  ;;
+            *.7z)        7z x $fx        ;;
+            *.tar.xz)    tar xf $fx      ;;
+        esac
+    }
+# >>>
+}}
+
+# 隐藏
+map . set hidden!
+
+# == Move ==
+map u up
+map e down
+map n updir
+map i open
+map U push 5u
+map E push 5e
+map gg top
+map G bottom
+
+map o extract
+
+# 多选
+
+# === File op ===
+map x cut
+map d delete
+map a push %mkdir<space>
+map A push $nvim<space>
+map y copy
+map p paste
+map r rename
+
+
+# === Search ===
+# map / search
+# map ? search-back
+map - search-prev
+map = search-next
+
+# === Mark ===
+#map m mark-save
+#map ' mark-load
+#map " mark-remove   需要shift
+
+# === Cmd ===
+#map <C-a> cmd-home
+#map <C-e> cmd-end
+map <C-up> cmd-history-prev
+map <C-down> cmd-history-next
+
+
+# lazygit
+map <c-g> push $lazygit<enter>
+
+# 注意：由于设置为s,所以以前的st,ss... 都变为不可用
+# 选择-> x,y,d工作
+map s toggle
+map v invert  # reverse select status
+
