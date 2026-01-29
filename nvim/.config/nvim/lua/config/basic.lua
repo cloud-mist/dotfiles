@@ -42,6 +42,24 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
+-- file type
+vim.filetype.add({
+	extension = {
+		fs = "fsharp",
+		fsx = "fsharp",
+		fsi = "fsharp",
+	},
+	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
+
+vim.diagnostic.config({ virtual_text = false })
+
+-- var
+vim.g.python3_host_prog = "/usr/bin/python3"
+vim.g.ruby_host_prog = "/usr/bin/ruby"
+vim.g.loaded_perl_provider = 0 -- not load perl
+
+-- beam cursor
 vim.cmd([[
-autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
-    ]])
+    autocmd VimLeave * set guicursor=a:ver25
+]])

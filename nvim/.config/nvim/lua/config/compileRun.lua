@@ -1,67 +1,43 @@
 ---   Compile & Run  ---
-vim.cmd([[
-map <F5> :call CompileRunGcc()<CR>
-func! CompileRunGcc()
-		exec "w"
-		if &filetype == 'c'
-				set splitbelow
-				exec "!gcc % -o %<"
-				:sp
-				:res -5
-				:term ./%<
-        elseif &filetype == 'zig'
-                set splitbelow
-                :sp
-                :res -5
-                :term zig build run
-		elseif &filetype == 'cpp'
-				set splitbelow
-				exec "!clang++ -std=c++17 -stdlib=libc++ % -Wall -o %<"
-				:sp
-				:res -5
-				:term ./%<
-		elseif &filetype == 'sh'
-				:!bash %
-		elseif &filetype == 'python'
-				set splitbelow
-				:sp
-				:res -5
-				:term python3 %
-		elseif &filetype == 'lua'
-				set splitbelow
-				:sp
-				:res -5
-				:term lua %
-		elseif &filetype == 'html'
-				silent! exec "!".g:mkdp_browser." % &"
-		elseif &filetype == 'markdown'
-				exec "MarkdownPreview"
-		elseif &filetype == 'asciidoc'
-				silent! exec "!brave % &"
-		elseif &filetype == 'rust'
-				set splitbelow
-				:sp
-				:res -5
-				:term cargo run -q
-		elseif &filetype == 'tex'
-				silent! exec "VimtexStop"
-				silent! exec "VimtexCompile"
-		elseif &filetype == 'go'
-				set splitbelow
-				:sp
-                :res -5
-				:term go run .
-        elseif &filetype == 'javascript'
-                set splitbelow
-                :sp
-                :res -5
-                :term node %
-        elseif &filetype == 'perl'
-                set splitbelow
-                :sp
-                :res -5
-                :term perl %
-		endif
-endfunc
+local function run_in_bottom_term()
+	vim.cmd("w") -- 运行前保存
+	local ft = vim.bo.filetype
+	local Terminal = require("toggleterm.terminal").Terminal
 
-]])
+	-- 语言命令映射
+	local commands = {
+		c = "gcc % -o %< && ./%<",
+		cpp = "clang++ -std=c++17 -stdlib=libc++ % -Wall -o %< && ./%<",
+		zig = "zig build run",
+		python = "python3 %",
+		lua = "lua %",
+		rust = "cargo run -q",
+		go = "go run .",
+		javascript = "node %",
+		perl = "perl %",
+		sh = "bash %",
+	}
+
+	local cmd = commands[ft]
+
+	if cmd then
+		local run_term = Terminal:new({
+			hide_number = false,
+			cmd = cmd,
+			direction = "horizontal",
+			size = 18,
+			close_on_exit = false, -- 运行完保留窗口查看结果
+			on_open = function(term)
+				vim.cmd("stopinsert")
+				vim.wo[term.window].number = true
+			end,
+		})
+		run_term:toggle()
+	elseif ft == "markdown" then
+		vim.cmd("MarkdownPreview")
+	else
+		print("该类型未定义运行逻辑: " .. ft)
+	end
+end
+
+vim.keymap.set("n", "<F5>", run_in_bottom_term, { desc = "ToggleTerm Bottom Runner" })
