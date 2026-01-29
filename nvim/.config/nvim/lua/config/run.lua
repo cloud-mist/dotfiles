@@ -1,6 +1,6 @@
 ---   Compile & Run  ---
 local function run_in_bottom_term()
-	vim.cmd("w") -- 运行前保存
+	vim.cmd("w")
 	local ft = vim.bo.filetype
 	local Terminal = require("toggleterm.terminal").Terminal
 

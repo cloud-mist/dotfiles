@@ -16,7 +16,7 @@ require("core.lazy")
 require("core.lsp")
 
 -- Basic
-require("config.keymap")
 require("config.basic")
-require("config.compileRun")
+require("config.keymap")
+require("config.run")
 require("config.alg")
