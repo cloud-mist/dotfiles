@@ -23,4 +23,7 @@ return {
 	vim.keymap.set("n", "<leader>fh", function()
 		require("fzf-lua").helptags()
 	end),
+	vim.keymap.set("n", "<leader>fm", function()
+		require("fzf-lua").marks()
+	end),
 }

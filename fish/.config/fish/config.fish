@@ -20,6 +20,8 @@ alias vim=nvim
 alias top=btop
 alias cat=bat
 alias ls=eza
+alias zig='zig-master'
+alias zls='zls-master'
 
 # -- go
 set -gx GOPATH $HOME/study/go

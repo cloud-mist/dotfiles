@@ -1,4 +1,5 @@
 local options = {
+	timeoutlen = 500,
 	termguicolors = true,
 	tabstop = 4,
 	softtabstop = 4,

@@ -10,6 +10,8 @@
 --                                        MY_NEOVIM_CONFIG
 --                                               By 忆の风
 --
+--
+--
 
 -- Core
 require("core.lazy")
