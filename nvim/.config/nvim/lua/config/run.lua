@@ -18,11 +18,17 @@ local function run_in_bottom_term()
 		rust = "cargo run -q",
 		go = "go run .",
 		zig = "zig build run",
+		html = string.format("firefox %s", file),
 	}
 
 	local cmd = commands[ft]
 
-	if cmd then
+	if ft == "html" then
+		vim.fn.jobstart(cmd, { detach = true })
+		print("已在 Firefox 中开启预览")
+	elseif ft == "markdown" then
+		vim.cmd("MarkdownPreview")
+	elseif cmd then
 		local run_term = Terminal:new({
 			hide_number = false,
 			cmd = cmd,
@@ -35,8 +41,6 @@ local function run_in_bottom_term()
 			end,
 		})
 		run_term:toggle()
-	elseif ft == "markdown" then
-		vim.cmd("MarkdownPreview")
 	else
 		print("该类型未定义运行逻辑: " .. ft)
 	end

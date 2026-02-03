@@ -102,12 +102,15 @@
         "interval": 900,
     },
 
-    "custom/lx-music-lyric": {
-        "exec": "curl http://localhost:23330/status 2> /dev/null | jq -r .lyricLineText",
-        "format": "<span color=\"#97dbd5\">❄ </span> {} <span color=\"#97dbd5\"> ❄</span> ",
-        "interval": 1,
-        "max-length": 30,
-        "min-length": 30,
-    },
+     "custom/lx-music-lyric": {
+         "exec": "curl http://localhost:23330/status 2> /dev/null | jq -r .lyricLineText",
+         "format": "<span color=\"#97dbd5\">❄ </span> {} <span color=\"#97dbd5\"> ❄</span> ",
+         "interval": 1,
+         "max-length": 40,
+         "min-length": 40,
+     },
+
+
+
 
 }

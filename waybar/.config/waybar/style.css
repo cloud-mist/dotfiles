@@ -39,3 +39,8 @@ window#waybar {
 #window {
   color: #55ff33;
 }
+
+#custom-lx-music-lyric {
+  font-style: italic;
+  padding: 0 20px;
+}

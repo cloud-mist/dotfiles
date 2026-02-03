@@ -22,6 +22,7 @@ local languages = {
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		event = "BufReadPost",
 		branch = "main",
 		build = ":TSUpdate",
 	},

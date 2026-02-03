@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
 	config = function()
 		local colors = {
 			bg = "#202328",
@@ -24,9 +24,7 @@ return {
 				return vim.fn.winwidth(0) > 80
 			end,
 			check_git_workspace = function()
-				local filepath = vim.fn.expand("%:p:h")
-				local gitdir = vim.fn.finddir(".git", filepath .. ";")
-				return gitdir and #gitdir > 0 and #gitdir < #filepath
+				return vim.b.gitsigns_head ~= nil
 			end,
 		}
 
@@ -86,7 +84,9 @@ return {
 		ins_left({
 			-- mode component
 			function()
-				-- auto change color according to neovims mode
+				return ""
+			end,
+			color = function()
 				local mode_color = {
 					n = colors.red,
 					i = colors.green,
@@ -109,10 +109,8 @@ return {
 					["!"] = colors.red,
 					t = colors.red,
 				}
-				vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-				return ""
+				return { fg = mode_color[vim.fn.mode()] or colors.red }
 			end,
-			color = "LualineMode",
 			padding = { right = 1 },
 		})
 
@@ -143,33 +141,23 @@ return {
 
 		ins_left({ "location" })
 
-		-- Insert mid section. You can make any number of sections in neovim :)
-		-- for lualine it's any number greater then 2
-		-- ins_left {
-		--    function()
-		--        return "%=3"
-		--    end
-		-- }
-
+		-- Lsp server name .
 		ins_left({
-			-- Lsp server name .
 			function()
 				local msg = "No Active Lsp"
-				local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-				local clients = vim.lsp.get_clients()
-				if next(clients) == nil then
+				local clients = vim.lsp.get_clients({ bufnr = 0 })
+				if #clients == 0 then
 					return msg
 				end
+
+				local names = {}
 				for _, client in ipairs(clients) do
-					local filetypes = client.config.filetypes
-					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-						return client.name
-					end
+					table.insert(names, client.name)
 				end
-				return msg
+				return table.concat(names, "|")
 			end,
 			icon = "",
-			color = { fg = "#ffffff", gui = "bold" },
+			color = { fg = colors.fg, gui = "bold" },
 		})
 
 		-- Add components to right sections

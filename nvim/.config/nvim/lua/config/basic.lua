@@ -55,10 +55,11 @@ vim.filetype.add({
 
 vim.diagnostic.config({ virtual_text = false })
 
--- var
-vim.g.python3_host_prog = "/usr/bin/python3"
-vim.g.ruby_host_prog = "/usr/bin/ruby"
-vim.g.loaded_perl_provider = 0 -- not load perl
+-- 禁用
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
 
 -- beam cursor
 vim.cmd([[

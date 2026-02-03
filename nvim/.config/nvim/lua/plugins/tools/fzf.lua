@@ -1,6 +1,6 @@
 return {
 	"ibhagwan/fzf-lua",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-mini/mini.icons" },
 	vim.keymap.set("n", "<leader>ff", function()
 		vim.cmd("tabnew")
 		require("fzf-lua").files()

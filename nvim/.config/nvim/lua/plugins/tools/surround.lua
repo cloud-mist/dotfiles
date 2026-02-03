@@ -2,6 +2,7 @@
 return {
 	"nvim-mini/mini.surround",
 	version = "*",
+	event = "InsertEnter",
 	config = function()
 		require("mini.surround").setup({
 			mappings = { -- 添加可以选中，如果删除、替换是选中的话，sd的d就把内容给删除了,sr也同样

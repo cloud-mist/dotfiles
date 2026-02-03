@@ -38,7 +38,7 @@ keymap.set("n", ">", ">>")
 --
 
 -- 分屏
-keymap.set("n", "s", "<Nop>")
+keymap.set("n", "s", "<Nop>") -- s开头给minisurround使用
 keymap.set("n", "<LEADER>si", ":set splitright<CR>:vsplit<CR>")
 keymap.set("n", "<LEADER>sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>")
 keymap.set("n", "<LEADER>su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>")

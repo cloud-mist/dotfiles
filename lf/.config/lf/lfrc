@@ -26,27 +26,49 @@ cmd delete ${{
     [ $ans = "y" ] && trash-put $fx
 }}
 
+
 cmd open ${{
-# <<<
-    case $(file --mime-type "$(readlink -f $f)" -b) in
+    # 预处理：获取规范化的绝对路径，避免符号链接导致的识别问题
+    FILE_PATH=$(readlink -f "$f")
+    MIME_TYPE=$(file --mime-type "$FILE_PATH" -b)
+    EXTENSION="${f##*.}"
 
-    text/*|application/json|inode/x-empty) $EDITOR $fx;;
+    # 定义一个静默后台运行的辅助函数，减少重复代码
+    run_bg() { setsid -f "$@" >/dev/null 2>&1; }
 
-    image/gif) setsid -f mpv --audio-display=no $f >/dev/null 2>&1 ;;
-    image/*) setsid -f imv $f >/dev/null 2>&1 ;;
-    audio/*) setsid -f mpv $f >/dev/null 2>&1 ;;
-    video/*) setsid -f mpv $f >/dev/null 2>&1 ;;
 
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/msword) setsid -f wps $f ;;
-    application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.ms-powerpoint) setsid -f wpp $f;;
-    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/vnd.ms-excel) setsid -f et $f;;
 
-    application/pdf) setsid -f evince $fx >/dev/null 2>&1 ;;
-    application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+    case "$MIME_TYPE" in
+        # 1. 文本类：直接用你那 17ms 的 Neovim 打开
+        text/*|application/json|application/javascript|application/xml|inode/x-empty)
+            $EDITOR $fx ;;
 
-        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
+        # 2. 图像类：GIF 用 mpv，其余用 imv
+        image/gif) run_bg mpv --loop --audio-display=no "$f" ;;
+        image/*)   run_bg imv "$f" ;;
+
+        # 3. 多媒体类
+        audio/*|video/*) run_bg mpv "$f" ;;
+
+        # 4. 办公文档 (WPS 系列)
+        *wordprocessingml.document|*msword) run_bg wps "$f" ;;
+        *presentationml.presentation|*ms-powerpoint) run_bg wpp "$f" ;;
+        *spreadsheetml.sheet|*ms-excel) run_bg et "$f" ;;
+
+        # 5. 阅读类：PDF/EPUB
+        application/pdf) run_bg evince "$f" ;;
+        application/epub+zip|application/x-mobipocket-ebook|application/vnd*epub*)
+            run_bg zathura "$f" ;;
+
+        # 6. 兜底逻辑：根据扩展名处理 Zig/Gleam 等新语言或执行默认程序
+        *)
+            case "$EXTENSION" in
+                zig|gleam|go|c3|odin) $EDITOR $fx ;;
+                html) run_bg firefox "$f" ;;
+                *) for file in $fx; do run_bg $OPENER "$file"; done ;;
+            esac
+            ;;
     esac
-# >>>
 }}
 
 
