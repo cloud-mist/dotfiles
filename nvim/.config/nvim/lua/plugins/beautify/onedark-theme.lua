@@ -14,8 +14,9 @@ return {
 				strings = "none",
 				variables = "none",
 			},
-
-			highlights = { ["@number"] = { fmt = "bold" } },
+			highlights = {
+				["@number"] = { fmt = "bold" },
+			},
 		})
 		require("onedark").load()
 	end,

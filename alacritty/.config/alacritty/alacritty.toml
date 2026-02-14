@@ -31,8 +31,8 @@ shape = "Beam"
 
 # theme
 [colors.primary]
-background= "#000000"
-foreground= "#f8f8f2"
+background = "#000000"
+foreground = "#f8f8f2"
 
 [colors.cursor]
 text = "#282a36"
@@ -87,4 +87,4 @@ foreground = "#f1fa8c"
 background = "#282a36"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false

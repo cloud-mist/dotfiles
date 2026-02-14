@@ -1,4 +1,4 @@
 return {
-	cmd = { "zls-master" },
+	cmd = { "zls" },
 	filetypes = { "zig", "zir" },
 }

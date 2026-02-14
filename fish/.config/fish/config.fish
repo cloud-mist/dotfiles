@@ -9,8 +9,6 @@ if status is-interactive
     alias top=btop
     alias cat=bat
     alias ls=eza
-    alias zig='zig-master'
-    alias zls='zls-master'
 
     alias zc="nvim $HOME/.config/fish/config.fish"
     alias vconf="cd $HOME/.config/nvim/; and nvim init.lua"
@@ -34,11 +32,16 @@ set -gx GOPROXY https://goproxy.io,direct
 
 set -gx PNPM_HOME "/home/shawn/.local/share/pnpm"
 
+set -gx ZIG $HOME/.config/zigAndzls/zig/bin/
+set -gx ZLS $HOME/.config/zigAndzls/
+
 
 
 #   --------- PATH ---------
 
 fish_add_path --path \
+    $ZIG \
+    $ZLS \
     $PNPM_HOME \
     $HOME/.yarn/bin \
     $HOME/.local/bin \
@@ -46,6 +49,7 @@ fish_add_path --path \
     $HOME/.cargo/bin \
     $GOBIN \
     $HOME/.dotnet/tools
+
 
 
 #   ------- EXTERNAL -------

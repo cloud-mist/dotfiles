@@ -8,7 +8,7 @@ local function run_in_bottom_term()
 	local file = vim.fn.expand("%")
 	local output = vim.fn.expand("%:r")
 	local commands = {
-		c = string.format("gcc -std=c23 -Wall %s -o %s; and ./%s", file, output, output), -- for fish
+		c = string.format("gcc -std=c11 -Wall %s -o %s; and ./%s", file, output, output), -- for fish
 		cpp = string.format("clang++ -std=c++17 -stdlib=libc++ %s -Wall -o %s; and ./%s", file, output, output),
 		python = string.format("python3 %s", file),
 		lua = string.format("lua %s", file),

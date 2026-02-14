@@ -41,7 +41,7 @@ return {
 				["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 			},
 
-			signature = { enabled = true },
+			signature = { enabled = true, window = { border = "rounded" } },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -50,7 +50,15 @@ return {
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
-			completion = { documentation = { auto_show = true } },
+			completion = {
+				documentation = { auto_show = true },
+				menu = {
+					draw = {
+						columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
+					},
+					scrollbar = false,
+				},
+			},
 
 			sources = {
 				default = { "lsp", "buffer", "snippets", "path" },

@@ -26,6 +26,7 @@ local options = {
 	smartcase = true,
 	pumheight = 10,
 	mouse = "a",
+	winborder = "rounded",
 	--
 	fileencodings = {
 		-- <<<

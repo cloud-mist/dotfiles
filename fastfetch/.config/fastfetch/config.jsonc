@@ -69,6 +69,7 @@
     {
       "type": "cpu",
       "key": "  󰻠",
+      "format": "Intel i5-13600KF ({cores-logical}) @ {freq-max}"
     },
     {
       "type": "gpu",

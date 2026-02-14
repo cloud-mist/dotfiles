@@ -15,11 +15,22 @@ keymap.set({ "n", "x" }, "i", "l") -- 保持i的语义，不切换到k是因为i
 -- move quickly
 keymap.set({ "n", "x" }, "U", "5k")
 keymap.set({ "n", "x" }, "E", "5j")
-keymap.set({ "n", "x" }, "W", "5w")
-keymap.set({ "n", "x" }, "B", "5b")
 
 keymap.set({ "n", "x", "o" }, "N", "0") -- 移动到当前行首
 keymap.set({ "n", "x", "o" }, "I", "$") -- 移动到当前行尾
+
+-- word move
+-- W：下一个大单词开头
+-- B：上一个大单词开头
+-- w：下一个小单词开头
+-- b：下一个小单词开头
+
+keymap.set({ "n", "x", "o" }, "j", "ge") -- 上一个小单词结尾
+keymap.set({ "n", "x", "o" }, "h", "e") -- 下一个小单词结尾
+
+keymap.set({ "n", "x", "o" }, "H", "E") -- 下一个大单词结尾
+
+keymap.set({ "n", "x", "o" }, "J", "%") -- 括号跳转
 
 -- insert
 keymap.set({ "n", "v" }, "k", "i")
