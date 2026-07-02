@@ -32,15 +32,13 @@ set -gx GOPROXY https://goproxy.io,direct
 
 set -gx PNPM_HOME "/home/shawn/.local/share/pnpm"
 
-set -gx ZIG $HOME/.config/zigAndzls/zig/bin/
-set -gx ZLS $HOME/.config/zigAndzls/
+set -gx ZLS $HOME/.config/zls/
 
 
 
 #   --------- PATH ---------
 
 fish_add_path --path \
-    $ZIG \
     $ZLS \
     $PNPM_HOME \
     $HOME/.yarn/bin \
@@ -48,7 +46,9 @@ fish_add_path --path \
     $HOME/.cabal/bin \
     $HOME/.cargo/bin \
     $GOBIN \
+    $HOME/.luarocks/bin \
     $HOME/.dotnet/tools
+
 
 
 

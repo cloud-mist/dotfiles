@@ -43,6 +43,8 @@ keymap.set("n", "=", "n")
 -- Indent
 keymap.set("n", "<", "<<")
 keymap.set("n", ">", ">>")
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
 
 --
 -- WINDOW
@@ -50,10 +52,10 @@ keymap.set("n", ">", ">>")
 
 -- 分屏
 keymap.set("n", "s", "<Nop>") -- s开头给minisurround使用
-keymap.set("n", "<LEADER>si", ":set splitright<CR>:vsplit<CR>")
-keymap.set("n", "<LEADER>sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>")
-keymap.set("n", "<LEADER>su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>")
-keymap.set("n", "<LEADER>se", ":set splitbelow<CR>:split<CR>")
+keymap.set("n", "<LEADER>si", "<cmd>vertical rightbelow split<CR>")
+keymap.set("n", "<LEADER>sn", "<cmd>vertical leftabove split<CR>")
+keymap.set("n", "<LEADER>su", "<cmd>leftabove split<CR>")
+keymap.set("n", "<LEADER>se", "<cmd>belowright split<CR>")
 
 -- 焦点移动
 keymap.set("n", "<LEADER>u", "<C-w>k")
@@ -83,11 +85,11 @@ keymap.set("n", "tmi", "<cmd>+tabmove<CR>")
 --
 keymap.set("v", "Y", '"+y') -- copy to clipboard
 keymap.set("n", "l", "u") -- undo, redo:C-r
-keymap.set("n", "<LEADER><CR>", ":nohl<CR>") -- cancel highlight
-keymap.set("n", "S", ":w<CR>") -- save
-keymap.set("n", "Q", ":q<CR>") -- quit
+keymap.set("n", "<LEADER><CR>", "<cmd>nohl<CR>") -- cancel highlight
+keymap.set("n", "S", "<cmd>w<CR>") -- save
+keymap.set("n", "Q", "<cmd>q<CR>") -- quit
 keymap.set("t", "<Esc>", "<C-\\><C-n>") -- terminal-mode
-keymap.set("n", "<C-g>", ":tabe<CR>:term lazygit<CR>") -- Lazygit
+-- keymap.set("n", "<C-g>", "<cmd>tabe<CR><cmd>term lazygit<CR>") -- Lazygit
 keymap.set("n", "M", "m") -- mark
 
 -- lsp
@@ -102,3 +104,8 @@ keymap.set("n", "<space>do", vim.diagnostic.open_float)
 keymap.set("n", "[d", vim.diagnostic.goto_prev)
 keymap.set("n", "]d", vim.diagnostic.goto_next)
 keymap.set("n", "<space>ds", vim.diagnostic.setloclist)
+
+-- treesitter
+keymap.set("n", "<CR>", "van", { remap = true, desc = "初始化 Tree-sitter 增量选择" })
+keymap.set("x", "<CR>", "an", { remap = true, desc = "扩大 Tree-sitter 选区" })
+keymap.set("x", "<A-CR>", "in", { remap = true, desc = "缩小 Tree-sitter 选区" })

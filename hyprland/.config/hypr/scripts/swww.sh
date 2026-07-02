@@ -1,9 +1,9 @@
 #!/bin/bash
 
-swww-daemon
+awww-daemon
 while true
 do
     file_name=$(find ~/wallpapers/ -type f | shuf -n 1)
-    swww img  --transition-type wipe --transition-angle 40 --transition-fps 120 $file_name
+    awww img  --transition-type wipe --transition-angle 40 --transition-fps 120 $file_name
     sleep 30m
 done

@@ -51,7 +51,7 @@ vim.filetype.add({
 		fsx = "fsharp",
 		fsi = "fsharp",
 	},
-	pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+	-- pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 })
 
 vim.diagnostic.config({ virtual_text = false })
