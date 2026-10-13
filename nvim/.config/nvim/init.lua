@@ -13,13 +13,11 @@
 --
 --
 
--- Core
+require("config.basic")
 require("core.lazy")
+require("config.keymap")
 require("core.lsp")
 
--- Basic
-require("config.basic")
-require("config.keymap")
 require("config.run")
 require("config.alg")
 

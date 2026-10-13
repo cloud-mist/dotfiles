@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	---@type Flash.Config
 	opts = {
+		labels = "arstneiofpluywcdvkgmjqxzb",
 		modes = {
 			search = {
 				enable = true,

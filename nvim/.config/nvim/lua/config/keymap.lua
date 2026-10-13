@@ -1,5 +1,5 @@
 -- ⭐:help map-modes
---   :help vim.keymap.set
+--   :help keymap.set
 --   o-mode: e.g. y,d,etc. and this operator, 映射o就是把这些操作也继承过来
 --   x-mode: visual + select mode
 --   v-mode: visual
@@ -109,3 +109,33 @@ keymap.set("n", "<space>ds", vim.diagnostic.setloclist)
 keymap.set("n", "<CR>", "van", { remap = true, desc = "初始化 Tree-sitter 增量选择" })
 keymap.set("x", "<CR>", "an", { remap = true, desc = "扩大 Tree-sitter 选区" })
 keymap.set("x", "<A-CR>", "in", { remap = true, desc = "缩小 Tree-sitter 选区" })
+
+-- fzf
+vim.keymap.set("n", "<leader>ff", function()
+	require("fzf-lua").files({
+		actions = {
+			["default"] = require("fzf-lua").actions.file_tabedit,
+		},
+	})
+end)
+keymap.set("n", "<leader>fb", function()
+	require("fzf-lua").builtin()
+end)
+keymap.set("n", "<leader>fk", function()
+	require("fzf-lua").keymaps()
+end)
+keymap.set("n", "<leader>fg", function()
+	require("fzf-lua").live_grep()
+end)
+keymap.set("n", "<leader>fq", function()
+	require("fzf-lua").quickfix()
+end)
+keymap.set("n", "<leader>fd", function()
+	require("fzf-lua").diagnostics_document()
+end)
+keymap.set("n", "<leader>fh", function()
+	require("fzf-lua").helptags()
+end)
+keymap.set("n", "<leader>fm", function()
+	require("fzf-lua").marks()
+end)

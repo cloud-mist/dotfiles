@@ -26,13 +26,12 @@ local options = {
 	smartcase = true,
 	pumheight = 10,
 	mouse = "a",
-	winborder = "rounded",
 	--
 	fileencodings = {
 		-- <<<
-		"ucs - bom",
-		"utf - 8",
-		"utf - 16",
+		"ucs-bom",
+		"utf-8",
+		"utf-16",
 		"gbk",
 		"big5",
 		"gb18030",

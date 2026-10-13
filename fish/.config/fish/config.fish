@@ -34,6 +34,13 @@ set -gx PNPM_HOME "/home/shawn/.local/share/pnpm"
 
 set -gx ZLS $HOME/.config/zls/
 
+# flutter
+set -gx PUB_HOSTED_URL "https://pub.flutter-io.cn"
+set -gx FLUTTER_STORAGE_BASE_URL "https://storage.flutter-io.cn"
+set -gx CHROME_EXECUTABLE "/usr/bin/google-chrome-stable"
+# android
+set -gx ANDROID_HOME "/home/shawn/Android/Sdk"
+
 
 
 #   --------- PATH ---------
@@ -47,8 +54,12 @@ fish_add_path --path \
     $HOME/.cargo/bin \
     $GOBIN \
     $HOME/.luarocks/bin \
-    $HOME/.dotnet/tools
-
+    $HOME/.dotnet/tools \
+    $HOME/Documents/flutter/bin/ \
+    $ANDROID_HOME \
+    $ANDROID_HOME/platform-tools \
+    $ANDROID_HOME/cmdline-tools/latest/bin \
+    $ANDROID_HOME/emulator
 
 
 

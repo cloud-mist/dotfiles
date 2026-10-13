@@ -1,8 +1,9 @@
 ---   Compile & Run  ---
+local current_term = nil
+
 local function run_in_bottom_term()
 	vim.cmd("w")
 	local ft = vim.bo.filetype
-	local Terminal = require("toggleterm.terminal").Terminal
 
 	-- 语言命令映射
 	local file = vim.fn.expand("%")
@@ -18,7 +19,7 @@ local function run_in_bottom_term()
 		rust = "cargo run -q",
 		go = "go run .",
 		zig = "zig build run",
-		html = string.format("firefox %s", file),
+		html = string.format("zen %s", file),
 	}
 
 	local cmd = commands[ft]
@@ -29,7 +30,12 @@ local function run_in_bottom_term()
 	elseif ft == "markdown" then
 		vim.cmd("MarkdownPreview")
 	elseif cmd then
-		local run_term = Terminal:new({
+		if current_term then
+			current_term:shutdown()
+		end
+
+		local Terminal = require("toggleterm.terminal").Terminal
+		current_term = Terminal:new({
 			hide_number = false,
 			cmd = cmd,
 			direction = "horizontal",
@@ -40,7 +46,7 @@ local function run_in_bottom_term()
 				vim.wo[term.window].number = true
 			end,
 		})
-		run_term:toggle()
+		current_term:toggle()
 	else
 		print("该类型未定义运行逻辑: " .. ft)
 	end

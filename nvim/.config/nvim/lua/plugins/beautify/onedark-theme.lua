@@ -1,7 +1,6 @@
 return {
 	"navarasu/onedark.nvim",
 	priority = 1000,
-
 	config = function()
 		require("onedark").setup({
 			toggle_style_key = "<leader>ts",
