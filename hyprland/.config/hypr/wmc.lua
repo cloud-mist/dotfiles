@@ -47,7 +47,7 @@ hl.config({
 	general = {
 		layout = "dwindle",
 		-- layout = "scrolling",
-		gaps_in = 4,
+		gaps_in = 3,
 		gaps_out = 7.5,
 		border_size = 2,
 		col = {
@@ -63,15 +63,16 @@ hl.config({
 			new_optimizations = false,
 		},
 		rounding = 6,
-		-- fullscreen_opacity = 0.95
 		shadow = {
-			enabled = false,
-			render_power = 1,
+			enabled = true,
+			range = 40,
+			render_power = 4,
+			offset = { 0, 5 },
+			color = "rgba(00000028)",
 		},
 	},
 	animations = {
 		enabled = true,
-		-- Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 	},
 	dwindle = {
 		-- pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
@@ -80,8 +81,8 @@ hl.config({
 	},
 	scrolling = {
 		fullscreen_on_one_column = true,
-		column_width = 0.7,
-		focus_fit_method = 0,
+		column_width = 0.5,
+		focus_fit_method = 1, -- fit
 	},
 
 	misc = {

@@ -2,7 +2,7 @@
 
 hl.window_rule({
 	match = {
-		class = "firefox|zen-browser|chromium|foliate|dust|zen",
+		class = "firefox|zen-browser|chromium|foliate|dust|zen|clash-verge",
 	},
 	border_size = 0,
 })

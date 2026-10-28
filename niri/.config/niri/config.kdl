@@ -15,7 +15,8 @@ input {
 }
 
 output "DP-2" {
-    mode "3840x2160@120"
+    //mode "3840x2160@119.880"
+    mode "3840x2160@143.999"
     scale 2
     transform "normal"
     position x=1440 y=640
@@ -309,5 +310,6 @@ binds {
 }
 
 debug {
-    render-drm-device "/dev/dri/renderD128" // note renderD129 is my NVIDIA GPU, yours can be different!
+//    render-drm-device "/dev/dri/renderD128" // note renderD129 is my NVIDIA GPU, yours can be different!
+    disable-direct-scanout
 }

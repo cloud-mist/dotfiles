@@ -18,7 +18,7 @@
 
 
     "niri/window": {
-        "format": " ~ {initialTitle}",
+        "format": " ~ {title}",
         "separate-outputs": false
     },
 
